@@ -119,6 +119,9 @@ class MazeSearch(AgentDepthFirst):
             if 0 <= r < height and 0 <= width and not self.walls[r][c]:
                 children.append(Node(state=(r,c), parent=node, action=action))
         return children
+class MazeSearchBFS(MazeSearch):
+    def remove_node(self):
+        return self.frontier.pop(0)
 
 maze = ([
 [1, 1, 0, 0, 0, 0, 1],   # walls
@@ -137,3 +140,9 @@ maze_environment.print()
 maze_solver = MazeSearch(maze_environment)
 maze_solver.print_frontier()
 solution_nodes = maze_solver.solve()
+
+maze_solver_bfs = MazeSearchBFS(maze_environment)
+maze_solver_bfs.print_frontier()
+solution_nodes = maze_solver_bfs.solve()
+
+maze_environment.print()
